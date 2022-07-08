@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <h1>CategoryView</h1>
-        <p>{{obj.newsdata}}</p>
-    </div>
+  <div>
+    <h1>CategoryView</h1>
+    <p>{{ obj.newsdata }}</p>
+    <button  @touchstart="nextjoy">下一个</button>
+  </div>
 </template>
 
 <script>
@@ -16,15 +17,22 @@ export default {
       newsdata: ''
     })
     onMounted(() => {
-      axios.get('/joy/api/gxdz')
-        .then(res => {
-          console.log(res)
-          obj.newsdata = res.data
-        })
+      axios.get('/joy/api/gxdz').then((res) => {
+        console.log(res)
+        obj.newsdata = res.data
+      })
     })
+    const nextjoy = () => {
+      console.log('换一个')
+      axios.get('/joy/api/gxdz').then((res) => {
+        console.log(res)
+        obj.newsdata = res.data
+      })
+    }
 
     return {
-      obj
+      obj,
+      nextjoy
     }
   }
 }
